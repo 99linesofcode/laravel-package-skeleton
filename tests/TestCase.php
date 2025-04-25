@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Linesofcode\LaravelPackageSkeleton\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +24,7 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
     }
