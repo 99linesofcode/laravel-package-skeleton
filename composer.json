@@ -25,7 +25,6 @@
         "nunomaduro/collision": "^8.6",
         "orchestra/testbench": "^10.2",
         "orchestra/testbench-dusk": "^10.2",
-        "peckphp/peck": "^0.1",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
@@ -49,13 +48,11 @@
         "format": " vendor/bin/pint",
         "refactor": "vendor/bin/rector",
         "test": [
-            "@typos",
             "@format",
             "@refactor",
             "@analyse",
             "vendor/bin/testbench package:test"
-        ],
-        "typos": "vendor/bin/peck"
+        ]
     },
     "extra": {
         "laravel": {
