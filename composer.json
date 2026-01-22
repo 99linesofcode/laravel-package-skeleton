@@ -1,7 +1,7 @@
 {
     "name": "99linesofcode/laravel-package-skeleton",
     "description": "Domain Driven Laravel Package Development Skeleton",
-    "version": "0.0.1",
+    "version": "dev-master",
     "keywords": [],
     "homepage": "https://github.com/99linesofcode/laravel-package-skeleton",
     "license": "MIT",
@@ -45,27 +45,48 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": "vendor/bin/testbench package:discover --ansi",
         "post-update-cmd": [
-            "vendor/bin/testbench ide-helper:generate",
-            "vendor/bin/testbench ide-helper:meta"
+            "@ide-helper"
         ],
-        "analyse": "vendor/bin/phpstan analyse --memory-limit=2G --ansi",
-        "format": " vendor/bin/pint",
-        "refactor": "vendor/bin/rector",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare",
+            "@ide-helper"
+        ],
+        "analyse": "@php vendor/bin/phpstan analyse --memory-limit=2G --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "ide-helper": [
+            "@php vendor/bin/testbench ide-helper:generate --ansi",
+            "@php vendor/bin/testbench ide-helper:meta --ansi",
+            "@php vendor/bin/testbench ide-helper:models -M --ansi"
+        ],
+        "lint": [
+            "@php vendor/bin/pint --test -v --ansi",
+            "@php vendor/bin/phpstan analyse --verbose --memory-limit=2G --ansi"
+        ],
+        "format": [
+            "@php vendor/bin/pint --ansi",
+            "@php vendor/bin/phpstan analyse --fix --memory-limit=2G --ansi",
+            "@refactor"
+        ],
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "refactor": "@php vendor/bin/rector --memory-limit=2G --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
+        ],
         "test": [
-            "@format",
-            "@refactor",
-            "@analyse",
-            "vendor/bin/testbench package:test"
+            "@php vendor/bin/testbench package:test"
         ]
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Linesofcode\\LaravelPackageSkeleton\\ServiceProvider"
+                "Blog\\BlogPanelProvider"
             ],
-            "aliases": {},
+            "aliases": [],
             "dont-discover": []
         }
     },

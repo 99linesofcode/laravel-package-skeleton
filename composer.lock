@@ -1709,6 +1709,9 @@
                 "source": "https://github.com/thephpleague/flysystem-local/tree/3.29.0"
             },
             "time": "2024-08-09T21:24:39+00:00"
+                "source": "https://github.com/thephpleague/flysystem-local/tree/3.31.0"
+            },
+            "time": "2026-01-23T15:30:45+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -2015,6 +2018,17 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/livewire/livewire/zipball/56aa1bb63a46e06181c56fa64717a7287e19115e",
                 "reference": "56aa1bb63a46e06181c56fa64717a7287e19115e",
+            "name": "livewire/livewire",
+            "version": "v4.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/livewire.git",
+                "reference": "11afe7b36dbb1d98e073551c217f87b2b6911f81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/11afe7b36dbb1d98e073551c217f87b2b6911f81",
+                "reference": "11afe7b36dbb1d98e073551c217f87b2b6911f81",
                 "shasum": ""
             },
             "require": {
@@ -2070,6 +2084,7 @@
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
                 "source": "https://github.com/livewire/livewire/tree/v3.6.3"
+                "source": "https://github.com/livewire/livewire/tree/v4.0.3"
             },
             "funding": [
                 {
@@ -2078,6 +2093,7 @@
                 }
             ],
             "time": "2025-04-12T22:26:52+00:00"
+            "time": "2026-01-23T06:13:46+00:00"
         },
         {
             "name": "livewire/volt",
@@ -7622,6 +7638,11 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpstan/phpstan/zipball/96dde49e967c0c22812bcfa7bda4ff82c09f3b0c",
                 "reference": "96dde49e967c0c22812bcfa7bda4ff82c09f3b0c",
+            "version": "2.1.37",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/28cd424c5ea984128c95cfa7ea658808e8954e49",
+                "reference": "28cd424c5ea984128c95cfa7ea658808e8954e49",
                 "shasum": ""
             },
             "require": {
@@ -7667,6 +7688,7 @@
                 }
             ],
             "time": "2025-04-16T13:19:18+00:00"
+            "time": "2026-01-24T08:21:55+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -7727,6 +7749,16 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/6b92469f8a7995e626da3aa487099617b8dfa260",
                 "reference": "6b92469f8a7995e626da3aa487099617b8dfa260",
+            "version": "2.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan-phpunit.git",
+                "reference": "e4c5a22bf43d3d2bd5a780ad261a622ff62c49a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/e4c5a22bf43d3d2bd5a780ad261a622ff62c49a4",
+                "reference": "e4c5a22bf43d3d2bd5a780ad261a622ff62c49a4",
                 "shasum": ""
             },
             "require": {
