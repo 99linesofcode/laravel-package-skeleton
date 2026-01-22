@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Linesofcode\LaravelPackageSkeleton\Domain\Models;
+namespace Blog\Domain\Models;
 
 use Auth\Domain\Models\User;
+use Blog\Infrastructure\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,7 +34,7 @@ class Post extends Model
      */
     protected static function newFactory()
     {
-        return FlightFactory::new();
+        return PostFactory::new();
     }
 
     /**

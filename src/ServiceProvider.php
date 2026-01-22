@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Linesofcode\LaravelPackageSkeleton;
+namespace Blog;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;

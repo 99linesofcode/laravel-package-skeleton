@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Linesofcode\LaravelPackageSkeleton\Tests;
+namespace Blog\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Linesofcode\LaravelPackageSkeleton\ServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -20,7 +19,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            ServiceProvider::class,
+            \Blog\ServiceProvider::class,
         ];
     }
 

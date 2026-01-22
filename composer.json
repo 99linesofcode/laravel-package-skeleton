@@ -35,13 +35,15 @@
     },
     "autoload": {
         "psr-4": {
-            "Linesofcode\\LaravelPackageSkeleton\\": "src/"
+            "Blog\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Linesofcode\\LaravelPackageSkeleton\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/",
+            "Blog\\Tests\\": "tests/"
         }
     },
     "scripts": {

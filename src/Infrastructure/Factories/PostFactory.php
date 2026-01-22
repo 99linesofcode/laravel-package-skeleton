@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Linesofcode\LaravelPackageSkeleton\Infrastructure\Factories;
+namespace Blog\Infrastructure\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
