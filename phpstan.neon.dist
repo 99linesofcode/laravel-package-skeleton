@@ -3,6 +3,9 @@ includes:
 
 parameters:
     level: 5
+    scanFiles:
+        - _ide_helper.php
+        - _ide_helper_models.php
     paths:
         - src
         - config

@@ -18,6 +18,7 @@
         "livewire/volt": "^1.7.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.5",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.18",
@@ -44,6 +45,10 @@
     },
     "scripts": {
         "post-autoload-dump": "vendor/bin/testbench package:discover --ansi",
+        "post-update-cmd": [
+            "vendor/bin/testbench ide-helper:generate",
+            "vendor/bin/testbench ide-helper:meta"
+        ],
         "analyse": "vendor/bin/phpstan analyse --memory-limit=2G --ansi",
         "format": " vendor/bin/pint",
         "refactor": "vendor/bin/rector",
