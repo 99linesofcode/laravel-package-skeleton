@@ -1,0 +1,74 @@
+<?php
+
+namespace Lines\Skeleton\App\Filament\Schemas;
+
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Schema;
+
+class PostForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Section::make()->components([
+                    self::title(),
+                    self::body(),
+                ])
+                    ->columnSpan(3)
+                    ->columnOrder([
+                        'default' => 2,
+                        'lg' => 1,
+                    ]),
+                Section::make()->components([
+                    Toggle::make('should_publish')->label('Publish')->live(),
+                    self::published(),
+                ])
+                    ->columnSpan(1)
+                    ->columnOrder([
+                        'default' => 1,
+                        'lg' => 2,
+                    ]),
+            ]);
+    }
+
+    private static function title(): TextInput
+    {
+        return TextInput::make('title')
+            ->autofocus()
+            ->label('Title')
+            ->inputMode('text')
+            ->minLength(2)
+            ->maxLength(128)
+            ->placeholder('Uuummmm, this is a tasty burger!')
+            ->required()
+            ->trim();
+    }
+
+    private static function body(): MarkdownEditor
+    {
+        return MarkdownEditor::make('body')
+            ->label('Content')
+            ->placeholder("Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb.")
+            ->required();
+    }
+
+    private static function published(): DatePicker
+    {
+        return DatePicker::make('published_at')
+            ->label('Publish on')
+            ->native(false)
+            ->closeOnDateSelection()
+            ->displayFormat('d-m-Y')
+            ->default(now()->toDateString())
+            ->locale('nl')
+            ->minDate(now()->startOfDay())
+            ->required(fn(Get $get): bool => $get('should_publish'))
+            ->visible(fn(Get $get): bool => $get('should_publish'));
+    }
+}

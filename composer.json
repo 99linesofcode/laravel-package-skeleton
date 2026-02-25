@@ -2,7 +2,6 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "99linesofcode/laravel-package-skeleton",
     "description": "Domain Driven Laravel Package Development Skeleton",
-    "version": "1.0",
     "keywords": [],
     "homepage": "https://github.com/99linesofcode/laravel-package-skeleton",
     "license": "MIT",

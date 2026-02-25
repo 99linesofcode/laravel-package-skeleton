@@ -6,6 +6,7 @@ namespace Lines\Skeleton;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Lines\Skeleton\App\Providers\PostServiceProvider;
 
 class SkeletonServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,7 @@ class SkeletonServiceProvider extends ServiceProvider
         $this->publishesMigrations([
             __DIR__.'../database/migrations' => database_path('migrations'),
         ]);
+
+        $this->app->register(PostServiceProvider::class);
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lines\Skeleton;
+namespace Lines\Skeleton\App\Providers;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -18,27 +18,10 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class PostServiceProvider extends PanelProvider
 {
-    public function boot(): void
-    {
-        // $this->loadMigrationsFrom(__DIR__.'../database/migrations');
-
-        // Blade::anonymousComponentPath(__DIR__.'/App/Views/Components', 'laravelpackageskeleton');
-        // Blade::componentNamespace('Auth\\App\\Views\\Components', 'laravelpackageskeleton');
-
-        // $this->mergeConfigFrom([
-        //     __DIR__.'/../config/blog.php', 'blog',
-        // ]);
-
-        $this->publishesMigrations([
-            __DIR__.'../database/migrations' => database_path('migrations'),
-        ]);
-    }
-
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -46,9 +29,9 @@ class PostServiceProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->discoverResources(in: __DIR__.'/App/Filament/Resources', for: 'Lines\Skeleton\App\Filament\Resources')
-            ->discoverPages(in: __DIR__.'/App/Filament/Pages', for: 'Lines\Skeleton\App\Filament\Pages')
-            ->discoverwidgets(in: __DIR__.'/App/Filament/Widgets', for: 'Lines\Skeleton\App\Filament\Widgets')
+            ->discoverResources(in: __DIR__.'/../Filament/Resources', for: 'Lines\Skeleton\App\Filament\Resources')
+            ->discoverPages(in: __DIR__.'/../Filament/Pages', for: 'Lines\Skeleton\App\Filament\Pages')
+            ->discoverwidgets(in: __DIR__.'/../Filament/Widgets', for: 'Lines\Skeleton\App\Filament\Widgets')
             ->pages([
                 Dashboard::class,
             ])
