@@ -25,9 +25,23 @@ _ide_helper.php
 _ide_helper_models.php
 .phpstorm.meta.php
 
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Pest
+/tests/Browser/Screenshots
+
 # direnv
 /.direnv
 .envrc
 
 /workbench
 phpstan.neon
+phpunit.xml
+
+# Playwright
+node_modules/
