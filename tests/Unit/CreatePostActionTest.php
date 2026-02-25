@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Blog\Tests\Unit;
+namespace Lines\Skeleton\Tests\Unit;
 
-use Blog\Domain\Actions\CreatePostAction;
-use Blog\Domain\DataTransferObjects\CreatePostData;
-use Blog\Domain\Models\Post;
-use Blog\Tests\TestCase;
+use Lines\Skeleton\Domain\Actions\CreatePostAction;
+use Lines\Skeleton\Domain\DataTransferObjects\CreatePostData;
+use Lines\Skeleton\Domain\Models\Post;
+use Lines\Skeleton\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
 final class CreatePostActionTest extends TestCase

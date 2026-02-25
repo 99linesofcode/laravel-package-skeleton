@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Blog\Domain\Actions;
+namespace Lines\Skeleton\Domain\Actions;
 
-use Blog\Domain\DataTransferObjects\CreatePostData;
-use Blog\Domain\Models\Post;
+use Lines\Skeleton\Domain\DataTransferObjects\CreatePostData;
+use Lines\Skeleton\Domain\Models\Post;
 
 final class CreatePostAction
 {

@@ -14,12 +14,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $blueprint): void {
-            $blueprint->id();
+            $blueprint->increments('id');
             $blueprint->foreignId('author_id')->constrained(table: 'users', column: 'id')->cascadeOnUpdate()->cascadeOnDelete();
             $blueprint->string('title');
             $blueprint->text('body');
             $blueprint->timestamp('published_at')->nullable();
             $blueprint->timestamps();
+            $blueprint->softDeletes();
         });
     }
 

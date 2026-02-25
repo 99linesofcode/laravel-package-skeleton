@@ -2,29 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Blog\Tests;
+namespace Lines\Skeleton\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Orchestra\Testbench\TestCase as Orchestra;
+use Orchestra\Testbench\Concerns\WithWorkbench;
 
-class TestCase extends Orchestra
+class TestCase extends \Orchestra\Testbench\TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithWorkbench;
 
     protected function setUp(): void
     {
         parent::setUp();
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            \Blog\ServiceProvider::class,
-        ];
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        config()->set('database.default', 'testing');
     }
 }

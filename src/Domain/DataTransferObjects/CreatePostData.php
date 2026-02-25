@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Blog\Domain\DataTransferObjects;
+namespace Lines\Skeleton\Domain\DataTransferObjects;
 
 final readonly class CreatePostData
 {

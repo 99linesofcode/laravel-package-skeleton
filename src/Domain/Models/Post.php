@@ -2,20 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Blog\Domain\Models;
+namespace Lines\Skeleton\Domain\Models;
 
 use Auth\Domain\Models\User;
-use Blog\Infrastructure\Factories\PostFactory;
+use Database\Factories\PostFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @mixin IdeHelperPost
  */
+#[UseFactory(PostFactory::class)]
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'author_id',
@@ -28,14 +31,6 @@ class Post extends Model
         'published_at' => 'datetime',
         'author_id' => 'int',
     ];
-
-    /**
-     * Create a new factory instance for the model.
-     */
-    protected static function newFactory()
-    {
-        return PostFactory::new();
-    }
 
     /**
      * Get the author of the post.
