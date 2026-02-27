@@ -5,6 +5,8 @@ migrations:
   - database/migrations
 seeders:
   - Database\Seeders\DatabaseSeeder
+providers:
+  - Workbench\App\Providers\WorkbenchServiceProvider
 purge:
   files:
     - .env

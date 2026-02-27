@@ -39,6 +39,5 @@ _ide_helper_models.php
 /.direnv
 .envrc
 
-/workbench
 phpstan.neon
 phpunit.xml
