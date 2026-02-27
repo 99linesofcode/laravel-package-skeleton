@@ -42,6 +42,3 @@ _ide_helper_models.php
 /workbench
 phpstan.neon
 phpunit.xml
-
-# Playwright
-node_modules/
