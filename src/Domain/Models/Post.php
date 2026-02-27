@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Lines\Skeleton\Domain\Models;
 
-use Auth\Domain\Models\User;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Lines\Auth\Domain\Models\User;
 
 /**
  * @mixin IdeHelperPost

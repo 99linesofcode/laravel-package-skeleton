@@ -1,7 +1,7 @@
 <?php
 
-namespace Auth\Domain\Models;
+namespace Lines\Auth\Domain\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Workbench\App\Models\User as WorkbenchUser;
 
-class User extends Authenticatable {}
+class User extends WorkbenchUser {}
