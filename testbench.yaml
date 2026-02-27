@@ -4,9 +4,7 @@ migrations:
   - workbench/database/migrations
   - database/migrations
 seeders:
-  - Database\Seeders\PostSeeder
-providers:
-  - Workbench\App\Providers\WorkbenchServiceProvider
+  - Database\Seeders\DatabaseSeeder
 purge:
   files:
     - .env
@@ -22,7 +20,7 @@ workbench:
     factories: true
     views: true
     web: true
-  install: false # run default laravel migrations
+  install: true # run default laravel migrations
   sync:
     - from: storage
       to: workbench/storage
