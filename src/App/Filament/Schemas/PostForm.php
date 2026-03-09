@@ -26,7 +26,10 @@ class PostForm
                         'lg' => 1,
                     ]),
                 Section::make()->components([
-                    Toggle::make('should_publish')->label('Publish')->live(),
+                    Toggle::make('should_publish')
+                        ->label('Publish')
+                        ->live()
+                        ->saved(false),
                     self::published(),
                 ])
                     ->columnSpan(1)
@@ -43,9 +46,9 @@ class PostForm
             ->autofocus()
             ->label('Title')
             ->inputMode('text')
-            ->minLength(2)
+            ->minLength(8)
             ->maxLength(128)
-            ->placeholder('Uuummmm, this is a tasty burger!')
+            ->placeholder(fake()->realTextBetween(8, 32))
             ->required()
             ->trim();
     }
@@ -54,7 +57,7 @@ class PostForm
     {
         return MarkdownEditor::make('body')
             ->label('Content')
-            ->placeholder("Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb.")
+            ->placeholder(fake()->realText(256))
             ->required();
     }
 
@@ -68,7 +71,7 @@ class PostForm
             ->default(now()->toDateString())
             ->locale('nl')
             ->minDate(now()->startOfDay())
-            ->required(fn(Get $get): bool => $get('should_publish'))
-            ->visible(fn(Get $get): bool => $get('should_publish'));
+            ->required(fn (Get $get): bool => $get('should_publish'))
+            ->visible(fn (Get $get): bool => $get('should_publish'));
     }
 }

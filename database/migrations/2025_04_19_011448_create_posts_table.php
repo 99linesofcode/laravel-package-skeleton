@@ -14,9 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $blueprint): void {
-            $blueprint->increments('id');
-            $blueprint->foreignId('author_id')->constrained(table: 'users', column: 'id')->cascadeOnUpdate()->cascadeOnDelete();
-            $blueprint->string('title');
+            $blueprint->uuid('id')->primary();
+            $blueprint->foreignUuid('author_id')->constrained(table: 'users', column: 'id')->cascadeOnUpdate()->cascadeOnDelete();
+            $blueprint->string('title')->unique();
             $blueprint->text('body');
             $blueprint->timestamp('published_at')->nullable();
             $blueprint->timestamps();

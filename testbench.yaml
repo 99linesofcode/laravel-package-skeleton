@@ -6,7 +6,22 @@ migrations:
 seeders:
   - Database\Seeders\DatabaseSeeder
 providers:
+  - BladeUI\Icons\BladeIconsServiceProvider
+  - BladeUI\Heroicons\BladeHeroiconsServiceProvider
+  - RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider
+  - Filament\Actions\ActionsServiceProvider
+  - Filament\FilamentServiceProvider
+  - Filament\Forms\FormsServiceProvider
+  - Filament\Infolists\InfolistsServiceProvider
+  - Filament\Notifications\NotificationsServiceProvider
+  - Filament\QueryBuilder\QueryBuilderServiceProvider
+  - Filament\Schemas\SchemasServiceProvider
+  - Filament\Support\SupportServiceProvider
+  - Filament\Tables\TablesServiceProvider
+  - Filament\Widgets\WidgetsServiceProvider
+  - Livewire\LivewireServiceProvider
   - Workbench\App\Providers\WorkbenchServiceProvider
+  - Lines\Skeleton\App\Providers\PostServiceProvider
 purge:
   files:
     - .env

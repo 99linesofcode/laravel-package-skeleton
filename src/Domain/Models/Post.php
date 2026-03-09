@@ -6,6 +6,7 @@ namespace Lines\Skeleton\Domain\Models;
 
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,8 +19,13 @@ use Lines\Auth\Domain\Models\User;
 #[UseFactory(PostFactory::class)]
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasUuids, SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'author_id',
         'title',
@@ -27,10 +33,26 @@ class Post extends Model
         'published_at',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, mixed>
+     */
     protected $casts = [
         'author_id' => 'int',
-        'published_at' => 'datetime'
+        'published_at' => 'datetime',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, mixed>
+     */
+    protected function casts(): array
+    {
+        return [
+        ];
+    }
 
     /**
      * Get the author of the post.
