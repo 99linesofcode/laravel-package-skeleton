@@ -15,92 +15,109 @@ describe('PostForm', function () {
         );
     });
 
-    it('requires title to be between 8 and 128 characters', function () {
-        livewire(CreatePost::class)
-            ->fillForm([
-                'title' => '',
-            ])
-            ->call('create')
-            ->assertHasFormErrors([
-                'title' => 'required',
-            ])
-            ->fillForm([
-                'title' => Str::random(7),
-            ])
-            ->call('create')
-            ->assertHasFormErrors([
-                'title' => 'min',
-            ])
-            ->fillForm([
-                'title' => Str::random(129),
-            ])
-            ->call('create')
-            ->assertHasFormErrors([
-                'title' => 'max',
-            ]);
+    describe('title', function () {
+        it('requires title to be between 8 and 128 characters', function () {
+            livewire(CreatePost::class)
+                ->fillForm([
+                    'title' => '',
+                ])
+                ->call('create')
+                ->assertHasFormErrors([
+                    'title' => 'required',
+                ])
+                ->fillForm([
+                    'title' => Str::random(7),
+                ])
+                ->call('create')
+                ->assertHasFormErrors([
+                    'title' => 'min',
+                ])
+                ->fillForm([
+                    'title' => Str::random(129),
+                ])
+                ->call('create')
+                ->assertHasFormErrors([
+                    'title' => 'max',
+                ]);
+        });
     });
 
-    it('requires body text', function () {
-        livewire(CreatePost::class)
-            ->fillForm([
-                'body' => '',
-            ])
-            ->call('create')
-            ->assertHasFormErrors([
-                'body' => 'required',
-            ]);
+    describe('body', function () {
+        it('is required', function () {
+            livewire(CreatePost::class)
+                ->fillForm([
+                    'body' => '',
+                ])
+                ->call('create')
+                ->assertHasFormErrors([
+                    'body' => 'required',
+                ]);
+        });
     });
 
-    it('requires published_at if should_publish toggle is true', function () {
-        livewire(CreatePost::class)
-            ->fillForm([
-                'should_publish' => false,
-                'published_at' => '',
-            ])
-            ->call('create')
-            ->assertHasNoFormErrors([
-                'published_at' => 'required',
-            ])
-            ->fillForm([
-                'should_publish' => true,
-                'published_at' => '',
-            ])
-            ->call('create')
-            ->assertHasFormErrors([
-                'published_at' => 'required',
-            ]);
+    describe('published_at', function () {
+        it('toggles the published_at field', function () {
+            livewire(CreatePost::class)
+                ->fillForm([
+                    'should_publish' => false,
+                ])
+                ->assertSchemaComponentHidden('published_at')
+                ->fillForm([
+                    'should_publish' => true,
+                ])
+                ->assertSchemaComponentVisible('published_at');
+        });
     });
 
-    it('hides published_at if should_publish toggle is false', function () {
-        livewire(CreatePost::class)
-            ->fillForm([
-                'should_publish' => false,
-            ])
-            ->assertSchemaComponentHidden('published_at')
-            ->fillForm([
-                'should_publish' => true,
-            ])
-            ->assertSchemaComponentVisible('published_at');
-    });
+    describe('published_at', function () {
+        it('is required if should_publish toggle is true', function () {
+            livewire(CreatePost::class)
+                ->fillForm([
+                    'should_publish' => false,
+                    'published_at' => '',
+                ])
+                ->call('create')
+                ->assertHasNoFormErrors([
+                    'published_at' => 'required',
+                ])
+                ->fillForm([
+                    'should_publish' => true,
+                    'published_at' => '',
+                ])
+                ->call('create')
+                ->assertHasFormErrors([
+                    'published_at' => 'required',
+                ]);
+        });
 
-    // TODO: published_at should be today or in the future when creating a new post but can be a date in the past when editing an existing post. What do?
-    it('requires published_at to be equal to the current or a future date', function () {
-        livewire(CreatePost::class)
-            ->fillForm([
-                'should_publish' => true,
-                'published_at' => now()->yesterday(),
-            ])
-            ->call('create')
-            ->assertHasFormErrors([
-                'published_at' => 'after_or_equal',
-            ])
-            ->fillForm([
-                'should_publish' => true,
-                'published_at' => now(),
-            ])
-            ->call('create')
-            ->assertHasNoFormErrors([
-                'published_at' => 'after_or_equal',
-            ]);
+        it('defaults to the current date', function () {
+            livewire(CreatePost::class)
+                ->fillForm([
+                    'should_publish' => true,
+                ])
+                ->assertSchemaStateSet([
+                    'published_at' => now()->toDateString(),
+                ]);
+        });
+
+        it('can be any date, past or future', function () {
+            livewire(CreatePost::class)
+                ->fillForm([
+                    'should_publish' => true,
+                    'published_at' => now()->yesterday(),
+                ])
+                ->call('create')
+                ->assertHasNoFormErrors([
+                    'published_at' => 'after_or_equal',
+                ])
+                ->fillForm([
+                    'should_publish' => true,
+                    'published_at' => now(),
+                ])
+                ->call('create')
+                ->assertHasNoFormErrors([
+                    'published_at' => 'after_or_equal',
+                ]);
+        });
     });
 });

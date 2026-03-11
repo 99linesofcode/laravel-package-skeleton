@@ -68,9 +68,9 @@ class PostForm
             ->native(false)
             ->closeOnDateSelection()
             ->displayFormat('d-m-Y')
-            ->default(now()->toDateString())
+            ->default(now())
+            ->formatStateUsing(fn ($s) => $s ?? now())
             ->locale('nl')
-            ->minDate(now()->startOfDay())
             ->required(fn (Get $get): bool => $get('should_publish'))
             ->visible(fn (Get $get): bool => $get('should_publish'));
     }

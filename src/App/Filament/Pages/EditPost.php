@@ -34,7 +34,6 @@ class EditPost extends EditRecord
         return [
             ...$data,
             'should_publish' => $data['published_at'] ? true : false,
-            'published_at' => $data['published_at'] ??= now()->toDateString(),
         ];
     }
 
