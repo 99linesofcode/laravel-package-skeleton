@@ -16,7 +16,7 @@ describe('UpdatePostAction', function () {
         $original = Post::factory()->create();
         $updated = Post::factory()->existing($original)->make()->toArray();
 
-        (new UpdatePostAction)(new PostData(...$updated));
+        (new UpdatePostAction)(PostData::fromArray($updated));
 
         assertDatabaseCount(Post::class, 1);
         assertDatabaseHas(Post::class, $updated);

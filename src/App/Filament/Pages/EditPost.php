@@ -40,8 +40,8 @@ class EditPost extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        return app(UpdatePostAction::class)(new PostData(
-            ...($data + $record->toArray())
+        return app(UpdatePostAction::class)(PostData::fromArray(
+            $data + $record->toArray()
         ));
     }
 }

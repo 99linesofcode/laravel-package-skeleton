@@ -4,16 +4,33 @@ declare(strict_types=1);
 
 namespace Lines\Skeleton\Domain\DataTransferObjects;
 
-final readonly class PostData
+use Carbon\CarbonImmutable;
+
+final readonly class PostData extends DataTransferObject
 {
-    public function __construct(
+    protected static function casts()
+    {
+        return [
+            'published_at' => fn ($v) => self::castCarbonOrNull($v),
+            'created_at' => fn ($v) => self::castCarbonOrNull($v),
+            'updated_at' => fn ($v) => self::castCarbonOrNull($v),
+            'deleted_at' => fn ($v) => self::castCarbonOrNull($v),
+        ];
+    }
+
+    protected function __construct(
+        public ?string $id,
         public int $author_id,
         public string $title,
         public string $body,
-        public ?string $id = null,
-        public ?string $published_at = null,
-        public ?string $created_at = null,
-        public ?string $updated_at = null,
-        public ?string $deleted_at = null,
+        public ?CarbonImmutable $published_at,
+        public ?CarbonImmutable $created_at,
+        public ?CarbonImmutable $updated_at,
+        public ?CarbonImmutable $deleted_at,
     ) {}
+
+    private static function castCarbonOrNull(?string $value)
+    {
+        return ! is_null($value) ? CarbonImmutable::parse($value) : null;
+    }
 }

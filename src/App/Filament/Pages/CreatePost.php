@@ -19,9 +19,9 @@ class CreatePost extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
-        return app(CreatePostAction::class)(new PostData(
+        return app(CreatePostAction::class)(PostData::fromArray([
             ...$data,
-            author_id: auth()->user()->id,
-        ));
+            'author_id' => auth()->user()->id,
+        ]));
     }
 }

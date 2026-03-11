@@ -14,7 +14,7 @@ describe('CreatePostAction', function () {
     it('creates a post', function () {
         $post = Post::factory()->make()->except('id');
 
-        (new CreatePostAction)(new PostData(...$post));
+        (new CreatePostAction)(PostData::fromArray($post));
 
         assertDatabaseHas(Post::class, $post);
     });
