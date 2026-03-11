@@ -7,6 +7,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Lines\Skeleton\Domain\Models\Post;
+use Lines\Skeleton\Domain\PostStatus;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Lines\Skeleton\Domain\Models\Post>
@@ -31,6 +32,8 @@ class PostFactory extends Factory
             'author_id' => 1,
             'title' => fake()->sentence(),
             'body' => fake()->sentences(asText: true),
+            'status' => PostStatus::Draft->value,
+            'published_at' => null,
         ];
     }
 
@@ -50,6 +53,7 @@ class PostFactory extends Factory
     public function draft(): static
     {
         return $this->state(fn () => [
+            'status' => PostStatus::Draft->value,
             'published_at' => null,
         ]);
     }
@@ -60,6 +64,7 @@ class PostFactory extends Factory
     public function scheduled(): static
     {
         return $this->state(fn () => [
+            'status' => PostStatus::Scheduled->value,
             'published_at' => now()->addWeeks(rand(1, 9)),
         ]);
     }
@@ -70,6 +75,7 @@ class PostFactory extends Factory
     public function published(): static
     {
         return $this->state(fn () => [
+            'status' => PostStatus::Published->value,
             'published_at' => now()->subMonth(rand(1, 9)),
         ]);
     }

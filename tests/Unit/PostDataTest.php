@@ -6,9 +6,44 @@ uses(\Lines\Skeleton\Tests\TestCase::class);
 
 use Carbon\CarbonImmutable;
 use Lines\Skeleton\Domain\DataTransferObjects\PostData;
+use Lines\Skeleton\Domain\PostStatus;
 
 describe('PostData', function () {
     describe('fromArray', function () {
+        describe('status', function () {
+            it('takes a PostStatus type', function () {
+                $dto = PostData::fromArray([
+                    'author_id' => 1,
+                    'title' => fake()->words(asText: true),
+                    'body' => fake()->paragraphs(asText: true),
+                    'status' => PostStatus::Draft,
+                ]);
+
+                expect($dto->status)->toBe(PostStatus::Draft);
+            });
+
+            it('casts to PostStatus::Draft when absent', function () {
+                $dto = PostData::fromArray([
+                    'author_id' => 1,
+                    'title' => fake()->words(asText: true),
+                    'body' => fake()->paragraphs(asText: true),
+                ]);
+
+                expect($dto->status)->toBe(PostStatus::Draft);
+            });
+
+            it('casts to PostStatus when string', function () {
+                $dto = PostData::fromArray([
+                    'author_id' => 1,
+                    'title' => fake()->words(asText: true),
+                    'body' => fake()->paragraphs(asText: true),
+                    'status' => 'draft',
+                ]);
+
+                expect($dto->status)->toBe(PostStatus::Draft);
+            });
+        });
+
         describe('published_at', function () {
             it('casts to CarbonImmutable', function () {
                 $dto = PostData::fromArray([
@@ -24,7 +59,7 @@ describe('PostData', function () {
                     ->toBe('2026-01-01');
             });
 
-            it('casts to null when absent', function () {
+            it('is nullable', function () {
                 $dto = PostData::fromArray([
                     'author_id' => 1,
                     'title' => fake()->words(asText: true),
@@ -50,7 +85,7 @@ describe('PostData', function () {
                     ->toBe('2026-01-01');
             });
 
-            it('casts to null when absent', function () {
+            it('is nullable', function () {
                 $dto = PostData::fromArray([
                     'author_id' => 1,
                     'title' => fake()->words(asText: true),
@@ -76,7 +111,7 @@ describe('PostData', function () {
                     ->toBe('2026-01-01');
             });
 
-            it('casts to null when absent', function () {
+            it('is nullable', function () {
                 $dto = PostData::fromArray([
                     'author_id' => 1,
                     'title' => fake()->words(asText: true),
@@ -102,7 +137,7 @@ describe('PostData', function () {
                     ->toBe('2026-01-01');
             });
 
-            it('casts to null when absent', function () {
+            it('is nullable', function () {
                 $dto = PostData::fromArray([
                     'author_id' => 1,
                     'title' => fake()->words(asText: true),

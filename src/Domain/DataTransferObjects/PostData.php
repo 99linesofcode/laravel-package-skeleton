@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Lines\Skeleton\Domain\DataTransferObjects;
 
 use Carbon\CarbonImmutable;
+use Lines\Skeleton\Domain\PostStatus;
 
 final readonly class PostData extends DataTransferObject
 {
-    protected static function casts()
+    protected static function casts(): array
     {
         return [
+            'status' => fn ($v) => self::castPostStatusOrDraft($v),
             'published_at' => fn ($v) => self::castCarbonOrNull($v),
             'created_at' => fn ($v) => self::castCarbonOrNull($v),
             'updated_at' => fn ($v) => self::castCarbonOrNull($v),
@@ -23,6 +25,7 @@ final readonly class PostData extends DataTransferObject
         public int $author_id,
         public string $title,
         public string $body,
+        public PostStatus $status,
         public ?CarbonImmutable $published_at,
         public ?CarbonImmutable $created_at,
         public ?CarbonImmutable $updated_at,
@@ -32,5 +35,14 @@ final readonly class PostData extends DataTransferObject
     private static function castCarbonOrNull(?string $value)
     {
         return ! is_null($value) ? CarbonImmutable::parse($value) : null;
+    }
+
+    private static function castPostStatusOrDraft(null|string|PostStatus $value): PostStatus
+    {
+        return match (true) {
+            ($value instanceof PostStatus) => $value,
+            is_string($value) => PostStatus::from($value),
+            is_null($value) => PostStatus::Draft,
+        };
     }
 }

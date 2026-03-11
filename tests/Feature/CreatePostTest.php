@@ -31,7 +31,7 @@ describe('PostResource', function () {
             });
 
             it('creates a Post', function () {
-                $post = Post::factory()->make()->toArray();
+                $post = Post::factory()->make()->except('status');
 
                 livewire(CreatePost::class)
                     ->fillForm($post)

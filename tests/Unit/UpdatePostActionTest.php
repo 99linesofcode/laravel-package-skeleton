@@ -13,7 +13,7 @@ use function Pest\Laravel\assertDatabaseHas;
 
 describe('UpdatePostAction', function () {
     it('updates an existing post', function () {
-        $original = Post::factory()->create();
+        $original = Post::factory()->draft()->create();
         $updated = Post::factory()->existing($original)->make()->toArray();
 
         (new UpdatePostAction)(PostData::fromArray($updated));

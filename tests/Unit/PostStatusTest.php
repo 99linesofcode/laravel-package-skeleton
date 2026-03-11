@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+use Lines\Skeleton\Domain\PostStatus;
+
+uses(\Lines\Skeleton\Tests\TestCase::class);
+
+describe('PostStatus', function () {
+    it('does not transition to the same status', function () {
+        PostStatus::Draft->transitionTo(PostStatus::Draft);
+    })->throwsNoExceptions();
+
+    describe('Draft', function () {
+        it('can transition to Scheduled', function () {
+            PostStatus::Draft->transitionTo(PostStatus::Scheduled);
+        })->throwsNoExceptions();
+
+        it('can transition to Published', function () {
+            PostStatus::Draft->transitionTo(PostStatus::Published);
+        })->throwsNoExceptions();
+
+    });
+
+    describe('Scheduled', function () {
+        it('can transition to Draft', function () {
+            PostStatus::Scheduled->transitionTo(PostStatus::Draft);
+        })->throwsNoExceptions();
+
+        it('can transition to Published', function () {
+            PostStatus::Scheduled->transitionTo(PostStatus::Published);
+        })->throwsNoExceptions();
+    });
+
+    describe('Published', function () {
+        it('can transition to Draft', function () {
+            PostStatus::Scheduled->transitionTo(PostStatus::Draft);
+        })->throwsNoExceptions();
+
+        it('can transition to Scheduled', function () {
+            PostStatus::Published->transitionTo(PostStatus::Scheduled);
+        })->throwsNoExceptions();
+    });
+});

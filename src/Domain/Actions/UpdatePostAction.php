@@ -17,6 +17,7 @@ final class UpdatePostAction
             'author_id' => $postData->author_id,
             'title' => $postData->title,
             'body' => $postData->body,
+            'status' => $postData->status->value,
             'published_at' => $postData->published_at,
         ]);
 

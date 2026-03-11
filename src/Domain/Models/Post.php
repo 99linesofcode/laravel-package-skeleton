@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Lines\Auth\Domain\Models\User;
+use Lines\Skeleton\Domain\PostStatus;
 
 /**
  * @mixin IdeHelperPost
@@ -30,17 +31,8 @@ class Post extends Model
         'author_id',
         'title',
         'body',
+        'status',
         'published_at',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, mixed>
-     */
-    protected $casts = [
-        'author_id' => 'int',
-        'published_at' => 'datetime',
     ];
 
     /**
@@ -51,6 +43,9 @@ class Post extends Model
     protected function casts(): array
     {
         return [
+            'author_id' => 'int',
+            'published_at' => 'datetime',
+            'status' => PostStatus::class,
         ];
     }
 

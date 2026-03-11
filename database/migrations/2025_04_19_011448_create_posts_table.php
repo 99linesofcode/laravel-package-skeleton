@@ -18,6 +18,7 @@ return new class extends Migration
             $blueprint->foreignUuid('author_id')->constrained(table: 'users', column: 'id')->cascadeOnUpdate()->cascadeOnDelete();
             $blueprint->string('title')->unique();
             $blueprint->text('body');
+            $blueprint->enum('status', ['draft', 'scheduled', 'published']);
             $blueprint->timestamp('published_at')->nullable();
             $blueprint->timestamps();
             $blueprint->softDeletes();
