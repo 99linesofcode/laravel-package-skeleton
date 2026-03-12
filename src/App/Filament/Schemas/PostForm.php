@@ -8,7 +8,9 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Lines\Skeleton\Domain\Models\Post;
 
 class PostForm
 {
@@ -26,10 +28,7 @@ class PostForm
                         'lg' => 1,
                     ]),
                 Section::make()->components([
-                    Toggle::make('should_publish')
-                        ->label('Publish')
-                        ->live()
-                        ->saved(false),
+                    self::should_publish(),
                     self::published(),
                 ])
                     ->columnSpan(1)
@@ -44,8 +43,8 @@ class PostForm
     {
         return TextInput::make('title')
             ->autofocus()
-            ->label('Title')
             ->inputMode('text')
+            ->label('Title')
             ->minLength(8)
             ->maxLength(128)
             ->placeholder(fake()->realTextBetween(8, 32))
@@ -61,16 +60,31 @@ class PostForm
             ->required();
     }
 
+    private static function should_publish(): Toggle
+    {
+        return Toggle::make('should_publish')
+            ->afterStateHydrated(function (Toggle $component, ?Post $record) {
+                $component->state(! is_null($record?->published_at));
+            })
+            ->afterStateUpdated(function (Set $set, bool $state, ?Post $record) {
+                $set('published_at', $state ? ($record?->published_at ?? now()) : null);
+            })
+            ->label('Publish')
+            ->live()
+            ->saved(false);
+    }
+
     private static function published(): DatePicker
     {
         return DatePicker::make('published_at')
-            ->label('Publish on')
-            ->native(false)
+            ->afterStateHydrated(function (DatePicker $component, ?Post $record) {
+                $component->state($record?->published_at);
+            })
             ->closeOnDateSelection()
             ->displayFormat('d-m-Y')
-            ->default(now())
-            ->formatStateUsing(fn ($s) => $s ?? now())
+            ->label('Publish on')
             ->locale('nl')
+            ->native(false)
             ->required(fn (Get $get): bool => $get('should_publish'))
             ->visible(fn (Get $get): bool => $get('should_publish'));
     }

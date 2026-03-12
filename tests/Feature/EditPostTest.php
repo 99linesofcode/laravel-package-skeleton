@@ -44,6 +44,7 @@ describe('PostResource', function () {
                     ->assertSchemaStateSet($original->toArray())
                     ->fillForm($modified)
                     ->call('save')
+                    ->assertHasNoFormErrors()
                     ->assertRedirect();
 
                 assertDatabaseHas(Post::class, $modified);

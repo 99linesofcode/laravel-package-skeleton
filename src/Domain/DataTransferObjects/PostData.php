@@ -32,7 +32,7 @@ final readonly class PostData extends DataTransferObject
         public ?CarbonImmutable $deleted_at,
     ) {}
 
-    private static function castCarbonOrNull(?string $value)
+    private static function castCarbonOrNull(?string $value): ?CarbonImmutable
     {
         return ! is_null($value) ? CarbonImmutable::parse($value) : null;
     }
