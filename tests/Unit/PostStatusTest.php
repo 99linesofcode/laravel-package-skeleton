@@ -7,7 +7,7 @@ use Lines\Skeleton\Domain\PostStatus;
 uses(\Lines\Skeleton\Tests\TestCase::class);
 
 describe('PostStatus', function () {
-    it('does not transition to the same status', function () {
+    it('returns early when transitioning to the same status', function () {
         PostStatus::Draft->transitionTo(PostStatus::Draft);
     })->throwsNoExceptions();
 

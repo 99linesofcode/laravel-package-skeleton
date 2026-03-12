@@ -12,76 +12,82 @@ final readonly class ConcreteDataTransferObject extends DataTransferObject
     protected static function casts(): array
     {
         return [
-            'status' => fn ($v) => TestStatus::from($v),
-            'created_at' => fn ($v) => CarbonImmutable::parse($v),
+            'published_at' => fn ($v) => CarbonImmutable::parse($v),
+            'status' => fn ($_, $data) => self::computeStatus($data),
         ];
     }
 
     public function __construct(
         public int $id,
         public string $name,
-        public TestStatus $status,
-        public ?CarbonImmutable $created_at,
+        public ?string $status,
+        public ?CarbonImmutable $published_at,
         public ?string $optional = null,
     ) {}
-}
 
-enum TestStatus: string
-{
-    case Active = 'active';
-    case Inactive = 'inactive';
+    private static function computeStatus(array $data): string
+    {
+        if (isset($data['published_at'])) {
+            $date = self::casts()['published_at']($data['published_at']);
+        } else {
+            $date = null;
+        }
+
+        return match (true) {
+            is_null($date) => 'draft',
+            $date->isPast() => 'published',
+            $date->isFuture() => 'scheduled',
+        };
+    }
 }
 
 describe('DataTransferObject', function () {
     describe('fromArray', function () {
+        it('returns the correct concrete instance', function () {
+            $dto = ConcreteDataTransferObject::fromArray([
+                'id' => fake()->randomNumber(),
+                'name' => fake()->sentence(),
+            ]);
+
+            expect($dto)->toBeInstanceOf(ConcreteDataTransferObject::class);
+        });
+
         it('correctly maps primitive properties', function () {
             $dto = ConcreteDataTransferObject::fromArray([
                 'id' => 1,
-                'name' => 'Test',
-                'status' => 'active',
-                'created_at' => '2026-01-01 00:00:00',
+                'name' => 'The man with the masterplan',
             ]);
 
             expect($dto->id)
                 ->toBe(1)
                 ->and($dto->name)
-                ->toBe('Test');
+                ->toBe('The man with the masterplan');
         });
 
-        it('casts a backed enum', function () {
+        it('can cast to a different type', function () {
             $dto = ConcreteDataTransferObject::fromArray([
-                'id' => 1,
-                'name' => 'Test',
-                'status' => 'active',
-                'created_at' => '2026-01-01 00:00:00',
+                'id' => fake()->randomNumber(),
+                'name' => fake()->sentence(),
+                'published_at' => '2026-01-01 00:00:00',
             ]);
 
-            expect($dto->status)
-                ->toBeInstanceOf(TestStatus::class)
-                ->and($dto->status)
-                ->toBe(TestStatus::Active);
+            expect($dto->published_at)->toBeInstanceOf(CarbonImmutable::class);
         });
 
-        it('casts a datetime string to CarbonImmutable', function () {
+        it('can set a property based on the value of another', function () {
             $dto = ConcreteDataTransferObject::fromArray([
-                'id' => 1,
-                'name' => 'Test',
-                'status' => 'active',
-                'created_at' => '2026-01-01 00:00:00',
+                'id' => fake()->randomNumber(),
+                'name' => fake()->sentence(),
+                'published_at' => '2026-01-01 00:00:00',
             ]);
 
-            expect($dto->created_at)
-                ->toBeInstanceOf(CarbonImmutable::class)
-                ->and($dto->created_at->format('Y-m-d'))
-                ->toBe('2026-01-01');
+            expect($dto)->toHaveProperty('status', 'published');
         });
 
         it('resolves null for a nullable property without casting', function () {
             $dto = ConcreteDataTransferObject::fromArray([
-                'id' => 1,
-                'name' => 'Test',
-                'status' => 'active',
-                'created_at' => '2026-01-01 00:00:00',
+                'id' => fake()->randomNumber(),
+                'name' => fake()->sentence(),
                 'optional' => null,
             ]);
 
@@ -90,25 +96,11 @@ describe('DataTransferObject', function () {
 
         it('resolves null for a nullable property when property is absent', function () {
             $dto = ConcreteDataTransferObject::fromArray([
-                'id' => 1,
-                'name' => 'Test',
-                'status' => 'active',
-                'created_at' => '2026-01-01 00:00:00',
+                'id' => fake()->randomNumber(),
+                'name' => fake()->sentence(),
             ]);
 
             expect($dto->optional)->toBeNull();
         });
-
-        it('returns the correct concrete type', function () {
-            $dto = ConcreteDataTransferObject::fromArray([
-                'id' => 1,
-                'name' => 'Test',
-                'status' => 'active',
-                'created_at' => null,
-            ]);
-
-            expect($dto)->toBeInstanceOf(ConcreteDataTransferObject::class);
-        });
-
     });
 });

@@ -34,7 +34,7 @@ abstract readonly class DataTransferObject
             $k = $p->getName();
             $v = $data[$k] ?? null;
 
-            $arguments[$k] = isset($casts[$k]) ? $casts[$k]($v) : $v;
+            $arguments[$k] = isset($casts[$k]) ? $casts[$k]($v, $data) : $v;
         }
 
         return new static(...$arguments);
