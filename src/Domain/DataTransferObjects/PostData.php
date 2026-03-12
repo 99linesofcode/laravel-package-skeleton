@@ -12,7 +12,7 @@ final readonly class PostData extends DataTransferObject
     protected static function casts(): array
     {
         return [
-            'status' => fn ($v) => self::castPostStatusOrDraft($v),
+            'status' => fn ($_v, $data) => self::computedStatus($data),
             'published_at' => fn ($v) => self::castCarbonOrNull($v),
             'created_at' => fn ($v) => self::castCarbonOrNull($v),
             'updated_at' => fn ($v) => self::castCarbonOrNull($v),
@@ -37,12 +37,18 @@ final readonly class PostData extends DataTransferObject
         return ! is_null($value) ? CarbonImmutable::parse($value) : null;
     }
 
-    private static function castPostStatusOrDraft(null|string|PostStatus $value): PostStatus
+    private static function computedStatus(array $data): PostStatus
     {
+        if (isset($data['published_at'])) {
+            $date = self::casts()['published_at']($data['published_at']);
+        } else {
+            $date = null;
+        }
+
         return match (true) {
-            ($value instanceof PostStatus) => $value,
-            is_string($value) => PostStatus::from($value),
-            is_null($value) => PostStatus::Draft,
+            is_null($date) => PostStatus::Draft,
+            $date->isPast() => PostStatus::Published,
+            $date->isFuture() => PostStatus::Scheduled,
         };
     }
 }

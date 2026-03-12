@@ -11,36 +11,32 @@ use Lines\Skeleton\Domain\PostStatus;
 describe('PostData', function () {
     describe('fromArray', function () {
         describe('status', function () {
-            it('takes a PostStatus type', function () {
-                $dto = PostData::fromArray([
-                    'author_id' => 1,
-                    'title' => fake()->words(asText: true),
-                    'body' => fake()->paragraphs(asText: true),
-                    'status' => PostStatus::Draft,
-                ]);
-
-                expect($dto->status)->toBe(PostStatus::Draft);
-            });
-
-            it('casts to PostStatus::Draft when absent', function () {
-                $dto = PostData::fromArray([
+            it('is computed from the published_at property', function () {
+                $draft = PostData::fromArray([
                     'author_id' => 1,
                     'title' => fake()->words(asText: true),
                     'body' => fake()->paragraphs(asText: true),
                 ]);
 
-                expect($dto->status)->toBe(PostStatus::Draft);
-            });
+                expect($draft)->toHaveProperty('status', PostStatus::Draft);
 
-            it('casts to PostStatus when string', function () {
-                $dto = PostData::fromArray([
+                $scheduled = PostData::fromArray([
                     'author_id' => 1,
                     'title' => fake()->words(asText: true),
                     'body' => fake()->paragraphs(asText: true),
-                    'status' => 'draft',
+                    'published_at' => now()->addWeek()->toDateString(),
                 ]);
 
-                expect($dto->status)->toBe(PostStatus::Draft);
+                expect($scheduled)->toHaveProperty('status', PostStatus::Scheduled);
+
+                $published = PostData::fromArray([
+                    'author_id' => 1,
+                    'title' => fake()->words(asText: true),
+                    'body' => fake()->paragraphs(asText: true),
+                    'published_at' => now()->subWeek()->toDateString(),
+                ]);
+
+                expect($published)->toHaveProperty('status', PostStatus::Published);
             });
         });
 
