@@ -14,7 +14,7 @@ class SkeletonServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
-        // $this->loadViewsFrom(__DIR__.'../resources/views', 'skeleton');
+        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'skeleton');
 
         // Blade::anonymousComponentPath(__DIR__.'/App/Views/Components', 'laravelpackageskeleton');
         // Blade::componentNamespace('Auth\\App\\Views\\Components', 'laravelpackageskeleton');
@@ -24,7 +24,7 @@ class SkeletonServiceProvider extends ServiceProvider
         // ]);
 
         $this->publishesMigrations([
-            __DIR__.'../database/migrations' => database_path('migrations'),
+            __DIR__.'/../database/migrations' => database_path('migrations'),
         ]);
 
         $this->app->register(PostServiceProvider::class);
