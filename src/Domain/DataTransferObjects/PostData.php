@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lines\Skeleton\Domain\DataTransferObjects;
 
 use Carbon\CarbonImmutable;
-use Lines\Skeleton\Domain\PostStatus;
+use Lines\Skeleton\Domain\Enums\PostStatus;
 
 final readonly class PostData extends DataTransferObject
 {

@@ -6,8 +6,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
+use Lines\Skeleton\Domain\Enums\PostStatus;
 use Lines\Skeleton\Domain\Models\Post;
-use Lines\Skeleton\Domain\PostStatus;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Lines\Skeleton\Domain\Models\Post>

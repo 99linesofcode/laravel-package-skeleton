@@ -11,7 +11,7 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
-use Lines\Skeleton\Domain\PostStatus;
+use Lines\Skeleton\Domain\Enums\PostStatus;
 
 class PostsTable
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Lines\Skeleton\Domain\PostStatus;
+use Lines\Skeleton\Domain\Enums\PostStatus;
 
 uses(\Lines\Skeleton\Tests\TestCase::class);
 

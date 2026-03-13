@@ -6,7 +6,7 @@ uses(\Lines\Skeleton\Tests\TestCase::class);
 
 use Carbon\CarbonImmutable;
 use Lines\Skeleton\Domain\DataTransferObjects\PostData;
-use Lines\Skeleton\Domain\PostStatus;
+use Lines\Skeleton\Domain\Enums\PostStatus;
 
 describe('PostData', function () {
     describe('fromArray', function () {

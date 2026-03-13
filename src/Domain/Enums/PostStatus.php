@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lines\Skeleton\Domain;
+namespace Lines\Skeleton\Domain\Enums;
 
 use DomainException;
 

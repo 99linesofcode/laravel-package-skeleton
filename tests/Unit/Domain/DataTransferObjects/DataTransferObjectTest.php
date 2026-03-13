@@ -55,13 +55,13 @@ describe('DataTransferObject', function () {
         it('correctly maps primitive properties', function () {
             $dto = ConcreteDataTransferObject::fromArray([
                 'id' => 1,
-                'name' => 'The man with the masterplan',
+                'name' => 'Who is the man with the masterplan?',
             ]);
 
             expect($dto->id)
                 ->toBe(1)
                 ->and($dto->name)
-                ->toBe('The man with the masterplan');
+                ->toBe('Who is the man with the masterplan?');
         });
 
         it('can cast to a different type', function () {
