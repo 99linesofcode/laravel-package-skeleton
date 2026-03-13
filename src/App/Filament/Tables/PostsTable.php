@@ -11,6 +11,7 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Lines\Skeleton\Domain\PostStatus;
 
 class PostsTable
 {
@@ -20,6 +21,7 @@ class PostsTable
             ->striped()
             ->columns([
                 self::title(),
+                self::status(),
             ])
             ->filters([
                 TrashedFilter::make(),
@@ -45,5 +47,17 @@ class PostsTable
             ->sortable()
             ->words(16)
             ->wrap();
+    }
+
+    private static function status(): TextColumn
+    {
+        return TextColumn::make('status')
+            ->badge()
+            ->color(fn (PostStatus $state) => match ($state) {
+                PostStatus::Draft => 'gray',
+                PostStatus::Scheduled => 'warning',
+                PostStatus::Published => 'success',
+            })
+            ->sortable();
     }
 }
