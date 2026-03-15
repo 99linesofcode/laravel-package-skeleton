@@ -11,6 +11,11 @@ use Livewire\Livewire;
 
 class SkeletonServiceProvider extends ServiceProvider
 {
+    public function register(): void
+    {
+        $this->app->register(PostServiceProvider::class);
+    }
+
     public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
@@ -30,7 +35,5 @@ class SkeletonServiceProvider extends ServiceProvider
         $this->publishesMigrations([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ]);
-
-        $this->app->register(PostServiceProvider::class);
     }
 }
