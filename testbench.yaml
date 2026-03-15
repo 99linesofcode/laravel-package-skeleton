@@ -1,5 +1,4 @@
-env:
-  APP_NAME: laravel-package-skeleton
+---
 migrations:
   - workbench/database/migrations
   - database/migrations
@@ -20,8 +19,8 @@ providers:
   - Filament\Tables\TablesServiceProvider
   - Filament\Widgets\WidgetsServiceProvider
   - Livewire\LivewireServiceProvider
+  - Lines\Skeleton\SkeletonServiceProvider
   - Workbench\App\Providers\WorkbenchServiceProvider
-  - Lines\Skeleton\App\Providers\PostServiceProvider
 purge:
   files:
     - .env
@@ -35,9 +34,8 @@ workbench:
     commands: true
     config: true
     factories: true
-    views: true
     web: true
-  install: true # run default laravel migrations
+  install: true
   sync:
     - from: storage
       to: workbench/storage

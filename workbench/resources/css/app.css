@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+@source '../../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../../vendor/orchestra/testbench-core/laravel/storage/framework/views/*.php';
+@source '../../../vendor/orchestra/testbench-core/laravel/resources/**/*.blade.php';
+@source '../../../vendor/orchestra/testbench-core/laravel/resources/**/*.js';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../../storage/framework/views/*.php';
+@source '../../../resources/**/*.blade.php';
+@source '../../../resources/**/*.js';
