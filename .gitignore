@@ -26,11 +26,11 @@ _ide_helper_models.php
 .phpstorm.meta.php
 
 # Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+/test-results
+/playwright-report
+/blob-report
+/playwright/.cache
+/playwright/.auth
 
 # Pest
 /tests/Browser/Screenshots
@@ -41,3 +41,6 @@ _ide_helper_models.php
 
 phpstan.neon
 phpunit.xml
+
+# Workbench
+/workbench/storage
