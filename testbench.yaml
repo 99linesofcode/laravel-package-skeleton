@@ -1,4 +1,6 @@
 ---
+env:
+  - APP_NAME=Skeleton
 migrations:
   - workbench/database/migrations
   - database/migrations

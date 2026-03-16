@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('web')->group(function () {
-    Route::livewire('/posts', 'skeleton::post-index');
+Route::name('skeleton.')->middleware('web')->group(function () {
+    Route::livewire('/posts', 'skeleton::PostIndex')->name('post.index');
 });

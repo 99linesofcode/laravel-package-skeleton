@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('pass1234'),
         ]);
 
-        Post::factory()->count(20)->create();
+        Post::factory()->count(5)->create();
+        Post::factory()->scheduled()->count(5)->create();
+        Post::factory()->published()->count(5)->create();
     }
 }
