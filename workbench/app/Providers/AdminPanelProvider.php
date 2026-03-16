@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lines\Skeleton\App\Providers;
+namespace Workbench\App\Providers;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -19,8 +19,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Lines\Skeleton\App\Filament\Plugins\PostPlugin;
 
-class PostServiceProvider extends PanelProvider
+class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
@@ -29,9 +30,7 @@ class PostServiceProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->discoverResources(in: __DIR__.'/../Filament/Resources', for: 'Lines\Skeleton\App\Filament\Resources')
-            ->discoverPages(in: __DIR__.'/../Filament/Pages', for: 'Lines\Skeleton\App\Filament\Pages')
-            ->discoverwidgets(in: __DIR__.'/../Filament/Widgets', for: 'Lines\Skeleton\App\Filament\Widgets')
+            ->plugin(PostPlugin::make())
             ->pages([
                 Dashboard::class,
             ])

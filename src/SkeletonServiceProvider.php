@@ -4,24 +4,42 @@ declare(strict_types=1);
 
 namespace Lines\Skeleton;
 
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
-use Lines\Skeleton\App\Providers\PostServiceProvider;
+use Filament\Support\Facades\FilamentAsset;
+use Filament\Support\Facades\FilamentIcon;
+use Illuminate\Filesystem\Filesystem;
 use Livewire\Livewire;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class SkeletonServiceProvider extends ServiceProvider
+class SkeletonServiceProvider extends PackageServiceProvider
 {
-    public function register(): void
+    public static string $name = 'skeleton';
+
+    public static string $viewNamespace = 'skeleton';
+
+    public function configurePackage(Package $package): void
     {
-        $this->app->register(PostServiceProvider::class);
+        $package->name(static::$name)
+            ->hasCommands($this->getCommands())
+            ->hasInstallCommand(function (InstallCommand $command) {
+                $command
+                    ->publishConfigFile()
+                    ->publishMigrations()
+                    ->askToRunMigrations();
+            })
+            ->hasConfigFile()
+            ->hasViews(static::$viewNamespace)
+            ->hasTranslations()
+            ->hasAssets()
+            ->hasRoute('web')
+            ->hasMigrations([
+                'create_posts_table',
+            ]);
     }
 
-    public function boot(): void
+    public function packageBooted(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'skeleton');
-
         Livewire::addNamespace(
             namespace: 'skeleton',
             classNamespace: 'Lines\\Skeleton\\App\\Livewire',
@@ -29,11 +47,66 @@ class SkeletonServiceProvider extends ServiceProvider
             classViewPath: __DIR__.'/../resources/views',
         );
 
-        // Blade::anonymousComponentPath(__DIR__.'/App/Views/Components', 'laravelpackageskeleton');
-        // Blade::componentNamespace('Auth\\App\\Views\\Components', 'laravelpackageskeleton');
+        FilamentAsset::register(
+            $this->getAssets(),
+            $this->getAssetPackageName()
+        );
 
-        $this->publishesMigrations([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ]);
+        FilamentAsset::registerScriptData(
+            $this->getScriptData(),
+            $this->getAssetPackageName()
+        );
+
+        FilamentIcon::register($this->getIcons());
+
+        // stubs
+        if (app()->runningInConsole()) {
+            foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
+                $this->publishes([
+                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
+                ], 'skeleton-stubs');
+            }
+        }
+    }
+
+    protected function getAssetPackageName(): ?string
+    {
+        return 'lines/skeleton';
+    }
+
+    /**
+     * @return array<Asset>
+     */
+    protected function getAssets(): array
+    {
+        return [
+            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
+            // Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
+            // Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+        ];
+    }
+
+    /**
+     * @return array<class-string>
+     */
+    protected function getCommands(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<string>
+     */
+    protected function getIcons(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getScriptData(): array
+    {
+        return [];
     }
 }
