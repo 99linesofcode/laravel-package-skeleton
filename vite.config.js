@@ -7,7 +7,7 @@ export default defineConfig({
         laravel({
             input: [
                 'workbench/resources/css/app.css',
-                'workbench/resources/js/app.js'
+                'workbench/resources/js/app.js',
             ],
             refresh: [
                 'workbench/resources/views/**',
