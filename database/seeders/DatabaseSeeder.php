@@ -1,11 +1,13 @@
 <?php
 
-namespace Database\Seeders;
+declare(strict_types=1);
+
+namespace Lines\Skeleton\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Lines\Auth\Database\Factories\UserFactory;
 use Lines\Skeleton\Domain\Models\Post;
-use Workbench\Database\Factories\UserFactory;
 
 class DatabaseSeeder extends Seeder
 {

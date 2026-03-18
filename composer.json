@@ -11,8 +11,18 @@
             "email": "3071062+99linesofcode@users.noreply.github.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../filament-user-module",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require": {
         "php": "^8.2",
+        "99linesofcode/filament-user-module": "@dev",
         "filament/filament": "^5.0",
         "illuminate/contracts": "^12.0",
         "livewire/livewire": "^4.2"
