@@ -1,0 +1,14 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 5
+    scanDirectories:
+        - stubs
+    scanFiles:
+        - _ide_helper.php
+        - _ide_helper_models.php
+    paths:
+        - src
+        - config
+    tmpDir: build/phpstan
