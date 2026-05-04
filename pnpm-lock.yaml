@@ -36,8 +36,8 @@ importers:
         specifier: ^3.8.3
         version: 3.8.3
       prettier-plugin-blade:
-        specifier: ^3.1.5
-        version: 3.1.5(prettier-plugin-tailwindcss@0.7.3(prettier@3.8.3))(prettier@3.8.3)
+        specifier: ^3.1.6
+        version: 3.1.6(prettier-plugin-tailwindcss@0.7.3(prettier@3.8.3))(prettier@3.8.3)
       prettier-plugin-tailwindcss:
         specifier: ^0.7.3
         version: 0.7.3(prettier@3.8.3)
@@ -1458,8 +1458,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-blade@3.1.5:
-    resolution: {integrity: sha512-3X6sEbVhBCWgAN5g0ZF4gulMmuOIaGN8nMXbGe4BLdqmhPJDCnyUipX2J4/On7sxKvEMVKEzz6LARDv+htWCvw==}
+  prettier-plugin-blade@3.1.6:
+    resolution: {integrity: sha512-XtVlH7IyVOWlCIW8Kx0lIKVa3U9XIDg7VcDfkiRgl+wSn6jvwRZkR9FFrRKibh5B/SiykTfhASSGjvKdXNmbWQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@prettier/plugin-php': ^0.24.0
@@ -3177,7 +3177,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-blade@3.1.5(prettier-plugin-tailwindcss@0.7.3(prettier@3.8.3))(prettier@3.8.3):
+  prettier-plugin-blade@3.1.6(prettier-plugin-tailwindcss@0.7.3(prettier@3.8.3))(prettier@3.8.3):
     dependencies:
       '@prettier/html-tags': 2.2.0
       '@prettier/parse-srcset': 3.1.0
