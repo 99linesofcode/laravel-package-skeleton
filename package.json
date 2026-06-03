@@ -12,7 +12,7 @@
         "axios": "^1.16.1",
         "concurrently": "^9.0.1",
         "eslint-config-prettier": "^10.1.8",
-        "intelephense": "^1.18.3",
+        "intelephense": "^1.18.4",
         "laravel-vite-plugin": "^3.1.0",
         "playwright": "1.60.0",
         "prettier": "^3.8.3",
