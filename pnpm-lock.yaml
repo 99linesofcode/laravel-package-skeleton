@@ -15,8 +15,8 @@ importers:
         specifier: ^4.3.1
         version: 4.3.1(vite@8.0.16(@types/node@25.9.1)(esbuild@0.27.4)(jiti@2.7.0))
       axios:
-        specifier: ^1.18.0
-        version: 1.18.0
+        specifier: ^1.18.1
+        version: 1.18.1
       concurrently:
         specifier: ^10.0.3
         version: 10.0.3
@@ -36,8 +36,8 @@ importers:
         specifier: ^3.8.4
         version: 3.8.4
       prettier-plugin-blade:
-        specifier: ^3.1.6
-        version: 3.1.6(prettier-plugin-tailwindcss@0.8.0(prettier@3.8.4))(prettier@3.8.4)
+        specifier: ^3.2.0
+        version: 3.2.0(prettier-plugin-tailwindcss@0.8.0(prettier@3.8.4))(prettier@3.8.4)
       prettier-plugin-tailwindcss:
         specifier: ^0.8.0
         version: 0.8.0(prettier@3.8.4)
@@ -686,8 +686,8 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  axios@1.18.0:
-    resolution: {integrity: sha512-E32NzpYKp++W7XRe52rHiXV2ehxmh3wbdgO7MHeFM+vqxLBYHzt0ElkiImtOBxtOmyp0yoC8C6uESVV84Y2/hw==}
+  axios@1.18.1:
+    resolution: {integrity: sha512-3nTvFlvpn9Zu/RkHUqtc7/+al4UpRW5az71ap5zccp6e8RAYEzhMTecX8Dz1wWDYrPpUoB1HAQEGEAEvUr7S9g==}
 
   balanced-match@4.0.4:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
@@ -1305,13 +1305,13 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-blade@3.1.6:
-    resolution: {integrity: sha512-XtVlH7IyVOWlCIW8Kx0lIKVa3U9XIDg7VcDfkiRgl+wSn6jvwRZkR9FFrRKibh5B/SiykTfhASSGjvKdXNmbWQ==}
+  prettier-plugin-blade@3.2.0:
+    resolution: {integrity: sha512-m480E3CwXsECNgkp9hxlzS5nPJUqyFGw/SD7vO6CzVMDxeNCGnnm1khe8AY/qDSr8Im9081qID5c2hxckrs6Iw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@prettier/plugin-php': ^0.24.0
       prettier: ^3.0.0
-      prettier-plugin-tailwindcss: ^0.7.0
+      prettier-plugin-tailwindcss: ^0.7.0 || ^0.8.0
     peerDependenciesMeta:
       '@prettier/plugin-php':
         optional: true
@@ -2172,7 +2172,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  axios@1.18.0:
+  axios@1.18.1:
     dependencies:
       follow-redirects: 1.16.0
       form-data: 4.0.6
@@ -2826,7 +2826,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-blade@3.1.6(prettier-plugin-tailwindcss@0.8.0(prettier@3.8.4))(prettier@3.8.4):
+  prettier-plugin-blade@3.2.0(prettier-plugin-tailwindcss@0.8.0(prettier@3.8.4))(prettier@3.8.4):
     dependencies:
       '@prettier/html-tags': 2.2.0
       '@prettier/parse-srcset': 3.1.0
