@@ -167,8 +167,8 @@ third-party integrations behind ports in `Domain`/`Infrastructure`.
   Composer scripts: `test`, `analyse`, `lint`, `format`, `refactor`, `build`,
   `prepare`, `serve`, `ide-helper`.
 - **Mechanical gates** (and what each makes impossible):
-  - `composer lint` — Pint `--test` plus PHPStan; style and type violations
-    fail the build.
+  - `composer lint` — Pint `--test` plus PHPStan plus deptrac; style, type
+    and boundary violations fail the build.
   - **Pest on Testbench** — behavioral tests in an isolated host app; a
     broken action/DTO/migration fails.
   - **Rector** — dead code, missing types and naming drift are corrected
@@ -177,8 +177,11 @@ third-party integrations behind ports in `Domain`/`Infrastructure`.
     equivalent of `eslint-plugin-boundaries`) — the layer contract
     (`App`/UI → `Domain` → `Infrastructure`; `Domain` imports no UI;
     `Infrastructure` implements the domain's ports) is the rule it enforces.
-    It is the designated gate for modules built from this skeleton; it is not
-    yet wired into this starter's `composer.json`/CI.
+    It is the designated gate for modules built from this skeleton. Wired
+    into `composer lint` and the `analyse` workflow; layers match by
+    namespace, so the rules hold wherever a consumer puts the code. The
+    composition root (the `*ServiceProvider`) sits outside the layers on
+    purpose: it is the one place wiring happens.
 
 ## 9. Future Considerations / Roadmap
 
