@@ -2,10 +2,9 @@
 
 The architecture document for this repository, following the
 [architecture.md](https://architecture.md) schema — built so an agent (or a
-new colleague) can comprehend the repository from this file alone, and so the
-architectural principles in the `software-architecture` and
-`software-development` skills (expressed for Laravel in the `laravel` skill)
-are visible in how this repo actually works. Fill every section; update it in
+new colleague) can comprehend the repository from this file alone, and so this
+repository's own architectural principles (expressed for Laravel below) are
+visible in how it actually works. Fill every section; update it in
 the same change that alters the architecture it describes.
 
 This repository is a **module/package starter**: a domain-driven Laravel
@@ -54,7 +53,7 @@ laravel-package-skeleton/
 └── devshell/                         # git submodule: devshell-php
 ```
 
-**Where the logic lives** (the `laravel` skill's placement table): a use case
+**Where the logic lives** (the placement rules stated here): a use case
 is an **action** (`Domain/Actions/*Action`, invokable, DTO in → model out,
 composing smaller actions); a readonly **DTO** (`*Data`) crosses the UI
 boundary; **models** are lean data + identity; a computed value is calculated
@@ -121,7 +120,7 @@ the boundary.
   `workbench/database/migrations` and `database/migrations`
   (`testbench.yaml`).
 - **Models use UUID primary keys** (`HasUuids` + `uuid('id')->primary()` +
-  `foreignUuid`), per the `laravel` skill.
+  `foreignUuid`), per §12.
 
 ## 5. External Integrations / APIs
 
@@ -231,9 +230,8 @@ Date of Last Update: 2026-10-06
 
 ## 12. Conventions & Boundaries
 
-The house standards this repository adheres to — the full contract lives in
-the `software-architecture` and `laravel` skills; this section records what
-is enforced **here**.
+The house standards this repository adheres to — stated here in full; this
+section records what is enforced **here**.
 
 - **Folder structure**: PSR-4, `Lines\<Module>\` → `src/`; hexagonal-flavored
   layering `App/` (UI) / `Domain/` / `Infrastructure/`. Domain folders grow
@@ -243,7 +241,7 @@ is enforced **here**.
 - **File naming**: role suffixes — `*Action`, `*Data`, `*Status`, `*Factory`,
   `*ServiceProvider`, `*QueryBuilder`, `*Collection`, `*Event`, `*Rule`.
   Models stay bare. Filament names (`*Resource`, `*Plugin`, `Create*`/`Edit*`/
-  `List*`) follow the `filament` skill. One class per file.
+  `List*`) follow Filament's own conventions. One class per file.
 - **Entry point**: the `*ServiceProvider` is the composition root — config,
   views, routes, migrations, commands and bindings are declared there; no
   `app()`/`resolve()` inside class bodies.
