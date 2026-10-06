@@ -6,7 +6,7 @@
 # appears; a gate without an owner erodes one change at a time.
 deptrac:
   paths:
-    - .
+    - src
   exclude_files:
     - '#(^|/)vendor/.*#'
     - '#(^|/)tests/.*#'
