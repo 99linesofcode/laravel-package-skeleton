@@ -8,11 +8,14 @@ Based on <https://github.com/spatie/laravel-package-tools>, this starter ships w
 
 This repository serves as a starting point to a modular approach to app development according to Domain Driven Design and Hexagonal Architecture principles. To get started:
 
+Run `/instantiate` from an empty package directory to do all of this for you. By hand:
+
 1. Create your package directory and run `git init`;
-1. Add package remote `git remote add origin <REPOSITORY> (i.e.git@github.com:99linesofcode/.git`);
-1. Add the skeleton as a secondary remote `git remote add skeleton git@github.com:99linesofcode/laravel-package-skeleton.git`;
-1. Update local repository using `git fetch skeleton`;
-1. Commit changes to the package repository `git rebase skeleton/main`.
+1. Add the skeleton as a remote named after it: `git remote add laravel-package-skeleton git@github.com:99linesofcode/laravel-package-skeleton.git`;
+1. Fetch it: `git fetch laravel-package-skeleton`;
+1. Merge it: `git merge --allow-unrelated-histories laravel-package-skeleton/main`.
+
+Updates are a plain `git fetch laravel-package-skeleton && git merge laravel-package-skeleton/main`: merge, never rebase or squash (git-skeleton's ADR 0001).
 
 If you have access to the Nix package manager you can initialize a local development environment like so:
 

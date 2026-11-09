@@ -20,6 +20,9 @@ npm-debug.log
 /.phpunit.result.cache
 /build
 
+# build output
+/dist
+
 # editors
 /.vscode
 
