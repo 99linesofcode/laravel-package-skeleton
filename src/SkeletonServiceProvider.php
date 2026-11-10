@@ -41,8 +41,8 @@ class SkeletonServiceProvider extends PackageServiceProvider
     {
         Livewire::addNamespace(
             namespace: 'skeleton',
-            classNamespace: 'Lines\\Skeleton\\App\\Livewire',
-            classPath: __DIR__.'/App/Livewire',
+            classNamespace: 'Lines\\Skeleton\\UserInterface\\Livewire',
+            classPath: __DIR__.'/UserInterface/Livewire',
             classViewPath: __DIR__.'/../resources/views',
         );
 
