@@ -23,6 +23,12 @@ If you have access to the Nix package manager you can initialize a local develop
 1. Run `echo use flake ./devshell >> .envrc`;
 1. Run `direnv allow`.
 
+## Using the package in an application
+
+In production the host application requires the package by version constraint. During development, point the host at your local checkout with a Composer path repository and `"symlink": true`, so changes show up without a release.
+
+The package owns no database: it ships migrations, and the host application's database holds its tables. Its own tests and the workbench run against a throwaway SQLite database that `composer prepare` creates.
+
 ## Contributing
 
 Please review the [Contribution Guidelines](https://github.com/99linesofcode/.github/blob/main/.github/CONTRIBUTING.md).
