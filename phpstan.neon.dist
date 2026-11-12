@@ -6,7 +6,6 @@ parameters:
     scanDirectories:
         - stubs
     scanFiles:
-        - _ide_helper.php
         - _ide_helper_models.php
     paths:
         - src
